@@ -1,4 +1,4 @@
-import { CommonRoutesConfig } from "../common/common_routes_config";
+import { CommonRoutesConfig } from "../common/common-routes-config";
 import { Application, Request, Response, NextFunction } from "express";
 
 export class BooksRoutes extends CommonRoutesConfig {

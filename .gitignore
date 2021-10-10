@@ -4,3 +4,4 @@ node_modules/
 
 # asdf config file
 .tool_versions
+.env
