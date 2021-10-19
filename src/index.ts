@@ -5,10 +5,11 @@ import helmet from "helmet";
 import * as dotenv from "dotenv";
 import cors from "cors";
 // import debug from "debug";
-import { errorHandler } from "./middleware/error.middleware";
-import { notFoundHandler } from "./middleware/not-found.middleware";
-import { CommonRoutesConfig } from "./common/common-routes-config";
-import { BooksRoutes } from "./books/books-routes";
+import { errorHandler } from "./middleware/ErrorMiddleware";
+import { CommonRoutesConfig } from "./common/CommonRoutesConfig";
+// import { BooksRoutes } from "./books/BooksRoutes";
+import { PlacesRoutes } from "./places/PlacesRoutes";
+
 
 dotenv.config();
 
@@ -46,7 +47,9 @@ if (!process.env.DEBUG) {
 // register Logger
 app.use(logger(loggerOptions));
 // register Books routes
-routes.push(new BooksRoutes(app));
+// routes.push(new BooksRoutes(app));
+routes.push(new PlacesRoutes(app));
+
 
 app.get("/", async (req: Request, res: Response): Promise<Response> => {
   return res.status(200).send({
@@ -54,9 +57,11 @@ app.get("/", async (req: Request, res: Response): Promise<Response> => {
   });
 });
 
-// error handlers mounted after all routes defenitions
-app.use(errorHandler);
-app.use(notFoundHandler);
+process.on('unhandledRejection', (reason: Error) => {
+  throw reason;
+ });
+
+app.use(errorHandler);                                                                                                                               
 
 try {
   app.listen(port);
