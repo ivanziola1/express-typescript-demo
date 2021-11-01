@@ -7,8 +7,10 @@ import cors from "cors";
 // import debug from "debug";
 import { errorHandler } from "./middleware/ErrorMiddleware";
 import { CommonRoutesConfig } from "./common/CommonRoutesConfig";
-// import { BooksRoutes } from "./books/BooksRoutes";
-import { PlacesRoutes } from "./places/PlacesRoutes";
+import { PlacesRoutes } from "./controllers/places/PlacesRoutes";
+import { UsersRoutes } from "./controllers/users/UsersRoutes";
+import { SessionsRoutes } from "./controllers/sessions/SessionsRoutes";
+
 
 
 dotenv.config();
@@ -48,14 +50,16 @@ if (!process.env.DEBUG) {
 app.use(logger(loggerOptions));
 // register Books routes
 // routes.push(new BooksRoutes(app));
+routes.push(new UsersRoutes(app));
+routes.push(new SessionsRoutes(app));
 routes.push(new PlacesRoutes(app));
 
 
-app.get("/", async (req: Request, res: Response): Promise<Response> => {
-  return res.status(200).send({
-    message: "Hello World!",
-  });
-});
+// app.get("/", async (req: Request, res: Response): Promise<Response> => {
+//   return res.status(200).send({
+//     message: "Hello World!",
+//   });
+// });
 
 process.on('unhandledRejection', (reason: Error) => {
   throw reason;

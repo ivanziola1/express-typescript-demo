@@ -1,7 +1,7 @@
 import HttpError from "./HttpError";
-export default class ForbiddenError extends HttpError {
+export default class BadRequestError extends HttpError {
   constructor(message: string) {
-    super(403, message, "Forbidden");
+    super(400, message, "Invalid request");
     Object.setPrototypeOf(this, HttpError.prototype);
   }
 }

@@ -1,9 +1,9 @@
-import { CommonRoutesConfig } from "../common/CommonRoutesConfig";
+import { CommonRoutesConfig } from "../../common/CommonRoutesConfig";
 import { Application, Request, Response, NextFunction } from "express";
 import { Prisma, PrismaClient } from "@prisma/client";
-import HttpException from "../common/errors/HttpError";
-import UnprocessableEntityError from "../common/errors/UnprocessableEntityError";
-import NotFoundError from "../common/errors/NotFoundError";
+import HttpException from "../../common/errors/HttpError";
+import UnprocessableEntityError from "../../common/errors/UnprocessableEntityError";
+import NotFoundError from "../../common/errors/NotFoundError";
 
 const prisma = new PrismaClient();
 
